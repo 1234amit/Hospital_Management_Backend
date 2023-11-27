@@ -42,8 +42,8 @@ const userSchema = new mongoose.Schema(
       },
     },
     role: {
-      type: String,
-      default: "user",
+      type: Number,
+      default: 0,
     },
 
     department:{
