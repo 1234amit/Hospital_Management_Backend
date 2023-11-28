@@ -1,5 +1,5 @@
 import express from "express";
-import { loginController, logoutController, registerController } from "../controllers/userController.js";
+import { loginController, logoutController, registerController, viewDoctorControllers } from "../controllers/userController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddlewares.js";
 
 //router object
@@ -21,6 +21,9 @@ router.get("/user-auth", requireSignIn, (req, res) => {
 router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
     res.status(200).send({ ok: true });
 });
+
+
+router.get("/view-doctor", requireSignIn, isAdmin, viewDoctorControllers);
 
 
 

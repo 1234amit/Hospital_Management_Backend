@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 // register controller code
 export const registerController = async (req, res) => {
     try {
-      const { name, email, password, address, city, country, phone } = req.body;
+      const { name, email, password, address, city, country, phone, department, role } = req.body;
       // validation
       if (
         !name ||!email ||!password ||!city ||!address ||!country ||!phone
@@ -32,6 +32,8 @@ export const registerController = async (req, res) => {
         city,
         country,
         phone,
+        department,
+        role
       });
       res.status(201).send({
         success: true,
@@ -134,4 +136,21 @@ export const logoutController = async(req, res)=>{
         })
     }
 }
+
+
+// view all users by role
+// when role is 3 that time we know he is a doctor
+
+export const viewDoctorControllers = async (req, res) => {
+  try {
+    // Fetch users with role equal to 3 from the database
+    const users = await userModel.find({ role: 3 });
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
   
